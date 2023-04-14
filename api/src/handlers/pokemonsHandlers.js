@@ -1,3 +1,5 @@
+const createPokemonController = require('../controllers/createPokemon');
+const getPokemonByID = require('../controllers/getPokemonByID');
 
 
 const getPokemons = (req,res)=>{
@@ -5,27 +7,37 @@ const getPokemons = (req,res)=>{
   if(name){
     res.status(200).send(`Traerá todos los pokemones que se llamen ${name} si es que existe`)
   } else {
-    res.status(200).send('Traerá todos los pokemones')
+    res.status(200).send('Traerá todos los pokemones tanto de los la api como los de la bdd')
   }
 };
 
-const getPokemon = (req,res)=>{
+// const getPokemon= async (req,res)=>{
+//   const {id} =  req.params;
+//   try {
+//     const [pokemon, types] = await getPokemonAndTypeById(id)
+//     // res.status(200).send(`Traerá el detalle de un pokemon en especifico de id: ${id}`)
+//     res.status(200).json({pokemon, types})
+//   } catch (error) {
+//     res.status(400).json({error: error.message})
+//   }
+// }
+
+const getPokemon= async (req,res)=>{
   const {id} =  req.params;
-    res.status(200).send(`Traerá el detalle de un pokemon en especifico de id: ${id}`)
-};
+  const source = isNaN(id) ? "bdd" : "api";
+  try {
+    const pokemon = await getPokemonByID(id,source)
+    res.status(200).json(pokemon);
+  } catch (error) {
+    res.status(404).json({error: error.message})
+  }
+}
+
 
 const createPokemon = async (req,res)=>{
   const {name,type,image,hp,attack,defense} = req.body
   try {
     const newPokemon = await createPokemonController({name,type,image,hp,attack,defense})
-    // res.status(201).send(`Estoy por crear un pokemon con los siguientes datos:
-    // name: ${name}
-    // type: ${type}
-    // sprite:${image}
-    // hp: ${hp}
-    // attack : ${attack}
-    // defense: ${defense}
-    // `)
     res.status(201).json(newPokemon)
   } catch (error) {
     res.status(400).json({error: error.message})
