@@ -11,16 +11,6 @@ const getPokemons = (req,res)=>{
   }
 };
 
-// const getPokemon= async (req,res)=>{
-//   const {id} =  req.params;
-//   try {
-//     const [pokemon, types] = await getPokemonAndTypeById(id)
-//     // res.status(200).send(`Traerá el detalle de un pokemon en especifico de id: ${id}`)
-//     res.status(200).json({pokemon, types})
-//   } catch (error) {
-//     res.status(400).json({error: error.message})
-//   }
-// }
 
 const getPokemon= async (req,res)=>{
   const {id} =  req.params;
