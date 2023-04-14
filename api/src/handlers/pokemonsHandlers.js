@@ -1,6 +1,8 @@
+// Imports de los controllers
 const createPokemonController = require('../controllers/createPokemon');
 const getPokemonByID = require('../controllers/getPokemonByID');
 
+// Handlers
 
 const getPokemons = (req,res)=>{
   const { name } = req.query;
@@ -10,7 +12,6 @@ const getPokemons = (req,res)=>{
     res.status(200).send('Traerá todos los pokemones tanto de los la api como los de la bdd')
   }
 };
-
 
 const getPokemon= async (req,res)=>{
   const {id} =  req.params;
@@ -22,7 +23,6 @@ const getPokemon= async (req,res)=>{
     res.status(404).json({error: error.message})
   }
 }
-
 
 const createPokemon = async (req,res)=>{
   const {name,type,image,hp,attack,defense} = req.body
