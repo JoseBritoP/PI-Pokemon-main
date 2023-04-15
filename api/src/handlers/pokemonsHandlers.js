@@ -31,9 +31,9 @@ const getPokemon= async (req,res)=>{
 }
 
 const createPokemon = async (req,res)=>{
-  const {name,type,image,hp,attack,defense} = req.body
+  const {name,types,image,hp,attack,defense} = req.body
   try {
-    const newPokemon = await createPokemonController({name,type,image,hp,attack,defense})
+    const newPokemon = await createPokemonController({name,types,image,hp,attack,defense})
     res.status(201).json(newPokemon)
   } catch (error) {
     res.status(400).json({error: error.message})

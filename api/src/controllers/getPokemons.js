@@ -59,8 +59,19 @@ const getPokemonByName = async (name) => {
   // };
 };
 
-const getPokemonsBDD = () => {
+const getPokemonsBDD = async () => {
   // Este trairá los pokemons creados y almacenados en la bdd
+  const pokemonBDD = await Pokemon.findAll(
+    {include: {
+      model: Type,
+      attribute: ['name'],
+      through:{
+        attribute:[],
+      }
+    }}
+  );
+  if(!pokemonBDD) throw Error ('No existe un pokemon en la BDD')
+  return pokemonBDD;
 };
 
 const getAllPokemons = () => {
