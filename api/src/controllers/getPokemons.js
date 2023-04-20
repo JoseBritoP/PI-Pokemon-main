@@ -1,6 +1,8 @@
 const { Pokemon , Type } = require('../db');
 const axios = require('axios');
 
+// Controllers del getPokemons
+
 const getPokemonsApi = async (limit) => {
   // Este hará una petición a la api simplemente
   // Debo limitar a que traiga cierta cantidad de pokemons y almacenarlos
@@ -59,8 +61,8 @@ const getPokemonByName = async (name) => {
   // };
 };
 
+// Este trairá los pokemons creados y almacenados en la bdd
 const getPokemonsBDD = async () => {
-  // Este trairá los pokemons creados y almacenados en la bdd
   const pokemonBDD = await Pokemon.findAll(
     {include: {
       model: Type,
@@ -74,8 +76,8 @@ const getPokemonsBDD = async () => {
   return pokemonBDD;
 };
 
+// Este traerá todos los pokemons, tanto de la api como los de la base de datos
 const getAllPokemons = () => {
-  // Este traerá todos los pokemons, tanto de la api como los de la base de datos
 };
 
 module.exports = {
