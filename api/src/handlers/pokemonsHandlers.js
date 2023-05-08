@@ -12,11 +12,12 @@ const getPokemons = async (req,res)=>{
     res.status(200).send(`Traerá todos los pokemones que se llamen ${name} si es que existe`);
     // const pokeApiQuery = getPokemonByName(name)
     // res.status(200).json(pokeApiQuery);
-  } else if(!name || name === undefined) {
+  } else if(!name || name === undefined) { //
     const pokeApi = await getPokemonsApi(60);
     // res.status(200).send('Traerá todos los pokemones tanto de los la api como los de la bdd');
     res.status(200).json(pokeApi);
   }
+  //adsadw
 };
 
 const getPokemon= async (req,res)=>{
